@@ -1,0 +1,27 @@
+<h1>Keto Macros Calculator</h1>
+<h4>Ketosis dietary needs macronutrients calculator</h4>
+<p>Find me in app/views/person/home.html.erb</p>
+
+<div class="row-fluid">
+	<div class=".col-md-6">
+		<%= form_for(@person) do |p| %>
+			  <%= p.label :age %>
+		      <%= p.number_field :age %>
+
+		      <%= p.label :weight %>
+		      <%= p.number_field :weight %>
+
+		      <%= p.label :height %>
+		      <%= p.number_field :height %>
+
+		      <%= p.label :bodyfat, "Body fat percentage" %>
+		      <%= p.number_field :bodyfat %>
+
+		      <%= p.submit "Calculate", class: "btn btn-primary" %>
+		<% end %>
+		</div>
+	<div class=".col-md-6">2nd 6 span</div>
+</div>
+<div class="row-fluid">
+	<p>bottom content</p>
+</div>
