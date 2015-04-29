@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  root 'person#home'
+  root 'people#home'
   resources :people
+  get 'rando' => 'people#rando'
+  get 'singledigit' => 'people#singledigit'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

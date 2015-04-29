@@ -8,6 +8,9 @@
 </head>
 <body>
 <div class="container">
+<pre><%= JSON.pretty_generate params if Rails.env.development?  %></pre>
+
+
 <%= yield %>
 </div>
 </body>

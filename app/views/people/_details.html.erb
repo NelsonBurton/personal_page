@@ -1,0 +1,19 @@
+<p><%= 'Total Calories: ' %>
+	<%= totalcals = CalculatorHelper.total_cals(@person.weight, @person.bodyfat).to_int %></p>
+	<% tbl = CalculatorHelper.daily_req_i(totalcals) %>
+
+<table class="table">
+<% tbl.each do |row_header, row_values| %>
+	<tr>
+
+		<% row_values.each do |val| %>
+			<th><%= val if val.is_a?(String)%></th>
+			<td><%= val.to_i unless val.is_a?(String)%></td>
+
+		<% end %>
+
+		<br>
+	</tr>
+<% end %>
+</table>
+
