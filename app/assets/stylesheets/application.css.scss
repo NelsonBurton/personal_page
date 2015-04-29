@@ -29,8 +29,9 @@
 	border-top: 1px solid #eaeaea;
 }
 
-.row-fluid {
-	  	padding-top: 40px;
+.row {
+	  	margin-top: 20px;
+      padding-top: 20px;
 		border-top: 1px solid #eaeaea;
 }
 
@@ -61,5 +62,12 @@ input {
   @extend .has-error;
   .form-control {
     color: $state-danger-text;
+  }
+}
+
+form {
+  padding-left: 20px;
+  label {
+    
   }
 }

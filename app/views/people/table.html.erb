@@ -2,28 +2,19 @@
 <h4>Ketosis dietary needs macronutrients calculator</h4>
 <p>Rails application by Nelson Burton<%#=link_to("Nelson Burton","http://nelsonburton.com")%></p>
 
-<div class="row-fluid">
-	<div class=".col-md-6">
-		<%= form_for(@person) do |p| %>
-		      <%= render 'people/error_messages' %>
-			  <%= p.label :age %>
-		      <%= p.number_field :age %>
-
-		      <%= p.label :weight, "Weight (lbs)" %>
-		      <%= p.number_field :weight %>
-
-		      <%= p.label :height , "Height (in)"%>
-		      <%= p.number_field :height %>
-
-		      <%= p.label :bodyfat, "Body fat percentage" %>
-		      <%= p.number_field :bodyfat %>
-
-		      <%= p.submit "Calculate", class: "btn btn-primary" %>
-		<% end %>
+<div class="row">
+	<div class="col-md-6">
+		<%= render 'form' %>
 		</div>
-	<div class=".col-md-6">More info about methods</div>
+	<div class="col-md-6">
+		<%= render 'moreinfo' %>
+	</div>
 </div>
-<div class="row-fluid">
-	<%= render partial: 'details' %>
+
+<div class="row">
+	<div class="col-md-12">
+		<%= render 'details' %>
+
+</div>
 </div>
 

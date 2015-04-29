@@ -30,7 +30,7 @@ module CalculatorHelper
 
 	def self.daily_req_i(daily_cals, carb_percent=10, fat_percent=70, protein_percent=20)
 		table = {}
-		table[:labels] = ["Macronutrient", "Target Ratios", "Target Calories", "Calories per Gram", "Grams"]
+		table[:labels] = ["Macronutrient", "Target Ratios (%)", "Target Calories (kcal)", "Calories per Gram (kcal/g)", "Grams (g)"]
 		table[:carbs] = ["Carbs", carb_percent, carb_percent/100.0 * daily_cals, CARBCAL ]
 		table[:carbs].push(table[:carbs][2]/table[:carbs][3])
 		table[:fat] = ["Fat", fat_percent, fat_percent/100.0 * daily_cals, FATCAL ]
