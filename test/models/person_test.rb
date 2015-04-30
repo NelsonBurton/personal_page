@@ -13,7 +13,7 @@ class PersonTest < ActiveSupport::TestCase
   	p.save
   end
   test "did a person get created" do
-  	p Person.first
   	assert Person.first
   end
+  
 end
