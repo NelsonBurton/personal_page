@@ -1,17 +1,23 @@
-		<%= form_for(@person, :html => {:class => "form-horizontal"}) do |p| %>
-		      <%= render 'people/error_messages' %>
-		      <div class="form-group">
-			  <%= p.label :age, "Age: " %>
-		      <%= p.number_field :age %>
-			  </div><div class="form-group">
-		      <%= p.label :weight, "Weight (lbs): " %>
-		      <%= p.number_field :weight %>
-		      </div><div class="form-group">
-		      <%= p.label :height , "Height (in): "%>
-		      <%= p.number_field :height %>
-		      </div><div class="form-group">
-		      <%= p.label :bodyfat, "Body fat percentage: " %>
-		      <%= p.number_field :bodyfat %>
-		  </div>
-		      <%= p.submit "Calculate", class: "btn btn-primary" %>
-		<% end %>
+<%= form_for(@person, :html => {:class => "form-horizontal"}) do |p| %>
+      <%= render 'people/error_messages' %>
+      <div class="form-group">
+	  <%= p.label :age, "Age: " %>
+      <%= p.number_field :age %>
+	  </div><div class="form-group">
+      <%= p.label :weight, "Weight (lbs): " %>
+      <%= p.number_field :weight %>
+      </div><div class="form-group">
+      <%= p.label :height , "Height (in): "%>
+      <%= p.number_field :height %>
+      </div><div class="form-group">
+      <%= p.label :bodyfat, "Body fat percentage: " %>
+      <%= p.number_field :bodyfat %>
+  </div>
+      <%= p.submit "Calculate", class: "btn btn-primary" %>
+<% end %>
+
+<pre><% Activity.where("name LIKE ?", "%weight%").each do |b |%>
+	<%= b.name %>
+	<%= b.calsperlb %>
+	<% end %>
+<%= Activity.where('id = 170') %></pre>
