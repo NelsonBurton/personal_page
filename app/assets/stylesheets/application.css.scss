@@ -17,6 +17,13 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+h1, h2, h3, h4, h5, h6 {
+    font-family:  'Roboto Slab', serif;
+}
+p, div {
+    font-family: 'Roboto Slab', serif;
+}
+
  @mixin box_sizing {
   -moz-box-sizing:    border-box;
   -webkit-box-sizing: border-box;
@@ -34,6 +41,8 @@
       padding-top: 20px;
 		border-top: 1px solid #eaeaea;
 }
+
+
 
 /* forms */
 
