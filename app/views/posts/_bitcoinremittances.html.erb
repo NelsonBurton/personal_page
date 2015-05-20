@@ -1,32 +1,39 @@
 <em>May 9, 2015</em>
 <h3>Bitcoin Remittances</h3>
-
-<p>A <%= link_to 'remittance ' ,'http://www.wikipedia.org/Remittance' %> is defined as a worker sending money from the country in which they work to family members and friends in their home country. These payments are typically around $200 per month per worker. Although this seems small, in aggregate, remittances are not insignificant. In many countries remittances are higher than any foreign aid received, and can make up a significant portion of GDP. Some of the largest remittance pathways in the world include US to Mexico ($21.6 billion per year), 
-<p>
+ </br>
+<h4>Background</h4>
+<p>A <%= link_to 'remittance ' ,'http://www.wikipedia.org/Remittance' %> is defined as a transfer of money from a foreign worker to someone in their home country. In the USA for example, a foreign worker typically sends home around $200 per month (the most common destinations are to Mexico, China, and India). Although this amount may seem small, in aggregate, remittances are not insignificant. </br></br>In many countries remittance payments are higher than any government foreign aid received, and can make up a significant portion of GDP. Some of the largest remittance pathways in the world include US to Mexico ($21.6 billion per year), UAE to India ($15 billion per year), and Hong Kong to China ($17 billion per year). A beautiful visualization of this data can be found on <%= link_to 'Pew Reseach Center. ' ,'http://www.pewsocialtrends.org/2014/02/20/remittance-map/' %> 
+</br></br></p>
 
 <h4>Current remittance flow</h4>
 
-	<h5>Western Union/Money Gram/Xoom</h5>
+	<p>Currently, in order to send money abroad, you would use either informal or formal pathways.</p> 
+	<h5><em>Formal pathways - Western Union/Money Gram/Xoom</em></h5>
 
-		<p>You connect your bank account ---> complex network of international transfers between banks 
-		>> paste in the picture from the filipino's guy's article)
+		<p>To send money via one of the above services, you would first send money to one of the companies by connecting your bank account or making a credit card purchase ---> complex network of international transfers between banks .
+
+
+		<%= image_tag('btcremit-wu.png', alt: "Western Union" , class: 'img-responsive') %>
 
 		This existing system of relationships adds complexity and thereby cost to the remittance flow. </p>
 
-	<h5>Informal System - Hawala</h5>
+	<h5><em>Informal Pathways - Hawala</em></h5>
 
 		<p>This system works through a series of informal relationships. Cost is typically around x. Drawbacks:
 
-		>> insert graphic</p>
+			<%= image_tag('btcremit-hawala.png', alt: "Hawala" , class: 'img-responsive') %></p>
+
+<h4>Introducing Bitcoin</h4>
+<%= image_tag('btcremit-btcvanilla.png', alt: "Bitcoin p2p" , class: 'img-responsive') %>
 
 <h4>Managed Bitcoin remittance system</h4>
 
-	<p>In the Bitcoin remittance market, there is currently First mile where a novice user should be able to trade their Native currency for BitCoin (native currency to BTC), Transfer of funds (BTC sender to BTC recipient), and Last Mile (BTC to native currency). </p>
+	<p>In the Bitcoin remittance market, there is currently First mile where a novice user should be able to trade their Native currency for BitCoin (native currency to BTC), Transfer of funds (BTC sender to BTC recipient), and Last Mile (BTC to native currency). Luis Buenaventura of Rebit.ph does an amazing job of explaining how this system would work <%= link_to 'here. ' ,'http://techcrunch.com/2015/01/30/the-bootstrappers-guide-to-bitcoin-remittances/' %> .</p>
 
-	>> insert picture
+		<%= image_tag('btcremit-onofframp.png', alt: "Bitcoin On-off ramp" , class: 'img-responsive') %>
 <p>
 	To an end user, the experience would be as simple as :
-	An ideal use case is you go onto a site, put in your relatives mobile phone number, your credit card number (or direct deposit to save 3%), and money and frequency of sending, and the site takes care of the rest. </p>
+	An ideal use case is you go onto a site, put in your relatives mobile phone number, your credit card number (or direct deposit to save 3%), and money and frequency of sending, and the site takes care of the rest. 		<%= image_tag('btcremit-managed.png', alt: "Bitcoin managed" , class: 'img-responsive') %></p>
 
 <h5>New Cost structure under Bitcoin system</h5>
 <p>
