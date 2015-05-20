@@ -11,7 +11,7 @@
 <body>
 <div class="container">
 	    <%= link_to image_tag('banner.jpg', alt: "NELSON BURTON" , class: 'img-responsive'), '/' %>
-<%= JSON.pretty_generate params unless Rails.env.development?  %>
+<%= JSON.pretty_generate params if Rails.env.development?  %>
 
 <div class="row">
 	<div class="col-md-2">

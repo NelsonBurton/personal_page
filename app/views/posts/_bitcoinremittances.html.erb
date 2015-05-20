@@ -1,77 +1,84 @@
 <em>May 9, 2015</em>
 <h3>Bitcoin Remittances</h3>
- </br>
+ 
 <h4>Background</h4>
-<p>A <%= link_to 'remittance ' ,'http://www.wikipedia.org/Remittance' %> is defined as a transfer of money from a foreign worker to someone in their home country. In the USA for example, a foreign worker typically sends home around $200 per month (the most common destinations are to Mexico, China, and India). Although this amount may seem small, in aggregate, remittances are not insignificant. </br></br>In many countries remittance payments are higher than any government foreign aid received, and can make up a significant portion of GDP. Some of the largest remittance pathways in the world include US to Mexico ($21.6 billion per year), UAE to India ($15 billion per year), and Hong Kong to China ($17 billion per year). A beautiful visualization of this data can be found on <%= link_to 'Pew Reseach Center. ' ,'http://www.pewsocialtrends.org/2014/02/20/remittance-map/' %> 
+<p>A <%= link_to 'remittance ' ,'http://www.wikipedia.org/Remittance' %> is defined as a transfer of money from a foreign worker to someone in their home country. In the USA for example, a foreign worker typically sends home around $200 per month (the most common destinations are to Mexico, China, and India). Although this amount may seem small, in aggregate, remittances are extremely significant. </br></br>In many countries remittance payments are higher than any government foreign aid received, and can make up a significant portion of GDP. Some of the largest remittance pathways in the world include US to Mexico ($21.6 billion per year), UAE to India ($15 billion per year), and Hong Kong to China ($17 billion per year). A beautiful visualization of this data can be found on <%= link_to 'Pew Reseach Center. ' ,'http://www.pewsocialtrends.org/2014/02/20/remittance-map/' %> 
 </br></br></p>
 
-<h4>Current remittance flow</h4>
+<h4>Current remittance flow pathways</h4>
 
-	<p>Currently, in order to send money abroad, you would use either informal or formal pathways.</p> 
+	<p>Currently, in order to send money abroad, you would use either informal or formal pathways.</p> </br>
 	<h5><em>Formal pathways - Western Union/Money Gram/Xoom</em></h5>
 
-		<p>To send money via one of the above services, you would first send money to one of the companies by connecting your bank account or making a credit card purchase ---> complex network of international transfers between banks .
-
+		<p>The diagram below shows how you might send money via Western Union, Money Gram, or Xoom. </br> </br>First, you would first send money by sending money to a Western Union agent (WU Agent). In return they would give you a MTCN (Money Transfer Control Number) to track your request. You would send this tracking MTCN number to the receiver (bottom orange pathway in the diagram). Next, behind the scenes, the WU agent in your home country would inform the WU Agent in the foreign country that this is a valid transaction. Your relative would then be able to visit the agent and receive the money by supplying the MTCN number and identification. </br></br> Behind the scenes, the actual money is transferred in a series of transactions between banks and financial institutions, adding overhead and cost to the transaction. </br></br>This existing system of relationships adds complexity and thereby cost to the remittance flow. <strong> A typical cost of transaction in this system is anywhere from 8-11%.</strong></br></br>
 
 		<%= image_tag('btcremit-wu.png', alt: "Western Union" , class: 'img-responsive') %>
 
-		This existing system of relationships adds complexity and thereby cost to the remittance flow. </p>
+		</br> </p></br> 
 
 	<h5><em>Informal Pathways - Hawala</em></h5>
 
-		<p>This system works through a series of informal relationships. Cost is typically around x. Drawbacks:
+		<p>Hawala is a informal system of money transfer that is very popular in the Indian subcontinent. This system works through a series of informal relationships of brokers based on trust. To send a remittance, you would contact a local Hawala broker. This broker would transmit this information to the foreign Hawala broker. Although this method is often much lower cost than more formal pathways, it is untraceable and completely dependent on trust between brokers. <strong> A typical cost of transaction in this system is anywhere from 1-5%.</strong>
 
-			<%= image_tag('btcremit-hawala.png', alt: "Hawala" , class: 'img-responsive') %></p>
+			<%= image_tag('btcremit-hawala.png', alt: "Hawala" , class: 'img-responsive') %></p></br></br>
 
-<h4>Introducing Bitcoin</h4>
+<h4>Introducing Bitcoin - a whole new pathway!</h4>
+<h5><em>To transmit using purely bitcoin with no intermediary</em></h5>
+<p>Using Bitcoin (BTC), a sender could send Bitcoin directly to a receiver. To get Bitcoin to send, they would need to use an exchange that operates in their local currency. Similarily, the receiver would need to use an exhange to get their native currency. This is the best method to use, do to the low transaction cost, but the downside is it requires both parties to be technically savvy enough to understand and use Bitcoin. <strong> The cost of this transaction would be the combined cost of the bid/ask spread in each exchange. For USD to MXP this would be <.2%</strong></p>
 <%= image_tag('btcremit-btcvanilla.png', alt: "Bitcoin p2p" , class: 'img-responsive') %>
+</br>
 
-<h4>Managed Bitcoin remittance system</h4>
+<h5><em>Split managed Bitcoin remittance system</em></h5>
 
-	<p>In the Bitcoin remittance market, there is currently First mile where a novice user should be able to trade their Native currency for BitCoin (native currency to BTC), Transfer of funds (BTC sender to BTC recipient), and Last Mile (BTC to native currency). Luis Buenaventura of Rebit.ph does an amazing job of explaining how this system would work <%= link_to 'here. ' ,'http://techcrunch.com/2015/01/30/the-bootstrappers-guide-to-bitcoin-remittances/' %> .</p>
+	<p>Unfortunately, it is unlikely the person-to-person Bitcoin transfer system will take off immediately because it requires technical ability that the majority of the world does not have. To this end, Bitcoin remittance services have sprung up that promise to transfer from one currency to another, but where neither the sender nor the receiver need to know that Bitcoin is being used behind the scenes. Ideally, sending money to a relative should be a simple as swiping a credit card and going to an ATM. </p></br></br>
+
+		<p>One way these Bitcoin backed money transfer services are accomplishing this mission is using a split system, where an "on-ramp" and "off-ramp" are separate businesses. In this division, the "on-ramp" business solves the problem of accepting USD and sending Bitcoin. The "off-ramp" service solves this problem by then exchanging those funds for the recipient's currency. Luis Buenaventura of Rebit.ph (an off-ramp service) does an amazing job of explaining how this system would work <%= link_to 'here. ' ,'http://techcrunch.com/2015/01/30/the-bootstrappers-guide-to-bitcoin-remittances/' %> .</p>
 
 		<%= image_tag('btcremit-onofframp.png', alt: "Bitcoin On-off ramp" , class: 'img-responsive') %>
-<p>
-	To an end user, the experience would be as simple as :
-	An ideal use case is you go onto a site, put in your relatives mobile phone number, your credit card number (or direct deposit to save 3%), and money and frequency of sending, and the site takes care of the rest. 		<%= image_tag('btcremit-managed.png', alt: "Bitcoin managed" , class: 'img-responsive') %></p>
 
-<h5>New Cost structure under Bitcoin system</h5>
-<p>
-	As of May 7 Bid/Ask spread of USD to MXP is 
-</br>
-	<table> <tr> <td>Bid:</td><td>	15.3049 </td> </tr>
-	<tr> <td>Ask:</td><td>	15.3066</td> </tr></table>
-</br>
-	This gives a cost of transaction 1 bip/2. This is because cost is calculated by (Bid - Ask)/(2 * Market). The larger the size of the transaction, the wider the investment bank's trading desk increases the spread. A bitcoin remittance company would want to avoid exposure to movements in underlying currency, so would aim to settle transactions immediately. 
-</br>
-	Your spread is transaction cost (assuming only bid/ask spread and no other fees) .01-.00011 = .00989 = 99 bips is profit margin. If you charged Western Union rates which is  so 1 bip. 
-</br>
+<h4>A solution to all problems - fully managed Bitcoin remittance system</h4>
+<p>A fully managed Bitcoin remittance system would include both the on-ramp and off-ramp systems into one business, allowing a more seamless user experience for the sender and receiver of the payment. Dealing with just one company would draw parallels to many people's existing process of using just Western Union or just Moneygram to send money. </p>
 
-	Currently with existing remittance networks, the average remittance size is $200/month charging 4.75%. Assuming your cost is only 1 bip you can significantly undercut Western Union. Of course this does not include the cost of infrastructure, marketing, support, charge contesting, etc. 
 </p>
+	In this sort of system, to an end user, the experience would be as simple as :
+	An ideal use case is you go onto a site, put in your relatives mobile phone number, your credit card number (or direct deposit to save 3%), and money and frequency of sending, and the site takes care of the rest. Behind the scenes, the full service remittance provider would be doing the exchange of BTC back and forth to receiving and sending currencies.		<%= image_tag('btcremit-managed.png', alt: "Bitcoin managed" , class: 'img-responsive') %></p>
 
-<h4>Financial Impact</h4>
+<h5><em>Financial Impact</em></h5>
 	<p>
 
-	If 1 company decides to pursue to bring all steps of the process in house, and provide first mile all the way to last mile services (highest potential profits), then due to the nature of remittance flows, there will be a net currency imbalance, with a surplus of sender currency, and deficit of receiver currency. 
+	If 1 company decides to pursue to bring all steps of the process in house, and provide first mile all the way to last mile services (the highest potential profits), then due to the nature of remittance flows (rich countries to poor countries), there will be a net currency imbalance. This currency imbalance will be tilted so that there is a surplus of sender currency, and deficit of receiver currency. 
 </p>
 
 <p>
-	E.g.
+	<em>To give an example of this, consider the following:</em></br></br>
 
 		As of 2013, the USA to Mexico remittance market was $21.6 billion. Let's break down an example of potential profits as a full service remittance provider (first to last mile).
-</br>
-		If as a service provider you were to capture 1% of the USA to Mexico remittance market, by providing services from between US dollars and Mexican pesos, and the net remittance transfer from 2013 was $21.6 billion, you would end up with $216 million dollars in USD cash, and 3.3 billion mexican pesos in cash dispensed. 
-</br>
-		Assuming you charged a 1% transaction fee. 
-</br>
-		In order to balance your books, you would need to be a participant in the forex market to transfer those USD to Pesos (so they go from your USD account receivable to your Mexican account payable). 
-</p>
+</br></br>
+		If as a service provider you were to capture 1% of the USA to Mexico remittance market, by providing money transfer services between US dollars (USD) and Mexican pesos (MXP), over the course of the year of doing business, you would end up with $216 million dollars in surplus USD cash (1% of $21.6 billion), and 3.3 billion MXP deficit because of cash dispensed. 
+</br></br>
+<h5><em>The need to balance your books</em></h5>
 
-		
-<h4>
-Proposed Business Idea to Mitigate Financial Impact</h4>
+		In order to actually have sufficient MXP in your dispensing account, you would need to be a participant in the forex market to transfer those USD received into Pesos (from an accounting perspective, going from your USD accounts receivable to your Mexican accounts payable). 
+</p>
 <p>
-A company that manages your sending and receving account balance. This would work by trading your balance such that whenever you generate enough of a surplus in your hedge account. 
-
+	A bitcoin remittance company would want to avoid exposure to movements in underlying currency, so they would aim to settle transactions immediately. This could take the form of a daily settlement forex trade, where the Bitcoin remittance companies looks at the sum total of transactions for the day (+ X USD, -Y MXP), and then makes the opposite transaction to balance their books (-X USD, +Y MXP). 
 </p>
+
+<p>
+	As of May 7, in the foreign exchange market, with worldwide daily volumes in the trillions of dollars, the Bid/Ask spread of USD to MXP is:
+</br></br>
+	<table class="table"> <tr> <td>USD / MXP </td><td></td> </tr>
+		<tr> <td>Bid: </td><td>	15.3049 </td> </tr>
+	<tr> <td>Ask: </td><td>	15.3066</td> </tr></table>
+</br></br>	Calculating cost using (Bid - Ask)/(2 * Market) gives a cost of transaction 1 basis point. (.01% : a basis point is a hundredth of a percent). This assumes no additional trading fees from the forex bank placing your trade, and that they are making their money based on this Bid/Ask spread. 
+</br></br>
+	Your spread is transaction cost (assuming only bid/ask spread and no other fees) .01-.00011 = .00989 = 99 bips is profit margin. If you charged half of Western Union rates (which are close to 8%) to stay competitive, you could make .04-.00011 = .03989 profit (3.989% on a transaction). If you captured 1% of the market in our earlier example, you would make <strong>$10.4 million in yearly profit. </strong> 
+
+
+
+</br></br>
+	Of course this doesn't include the costs of developing and maintaining this software solution, as well as marketing, support, charge contesting, etc.; but the market is still very lucrative. 
+	A full scale Bitcoin remittance operator has huge potential to change the remittance market by globally reducing fees and increasing ease of transferring money. </br></br>Existing operators (I'm looking at you Western Union), need to quickly adapt to new ways of doing business, or be ruled obsolete by Bitcoin. 
+</p>
+
+
