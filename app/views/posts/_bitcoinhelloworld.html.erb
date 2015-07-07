@@ -1,0 +1,257 @@
+<em>June 30, 2015</em>
+<h3>Blockchain Hello World</h3>
+ 
+<h4>Background</h4>
+<p>
+This post explains how to write a message into the Bitcoin blockchain using Ruby.
+</p>
+<p> Writing a message into the Blockchain means anyone can prove the existence of anything at a specific time, without the need to trust a central authority. This decentralized approach to record keeping, accessible to all, has endless business applications. Already, companies are working on clearing transactions (Digital Asset Holdings), proving ownership of digital art (Ascribe.io), and ownership (Proof of Existence).
+</p> 
+<p>
+The Bitcoin Blockchain is a master ledger of all transactions. Each transaction is composed of the inputs (money senders) and outputs (money receivers), amount of Bitcoin, and a cryptographic signature. This entire record forms a transaction, and once confirmed into a block, is placed on the blockchain forever. 
+</p> 
+<p>
+The steps below will show you how to write your own message into the Blockchain for all perpetuity. </br>
+</p> 
+</br>
+<h4>Steps</h4>
+<p><strong>
+	0. Download Ruby Bitcoin Libary</br>
+	1. Create a testnet address</br>
+	2. Send funds from testnet faucet to new address</br>
+	3. Verify transfer of funds</br>
+	4. Create a new transaction with OP_RETURN</br>
+	5. Relay new transaction to Bitcoin testnet</br>
+	6. Verify transaction exists</br>
+</strong>
+</br>
+</p> 
+
+<h4>0. Download Ruby Bitcoin Libary</h4>
+<p>
+	We will be using a Ruby Bitcoin library for interacting with the protocol and network. This library includes functionality common to all Bitcoin transactions, including signature verification and creating scripts. 
+</p>
+<p>Download, and follow the installation instructions within. <%= link_to 'Bitcoin-ruby' ,'https://github.com/lian/bitcoin-ruby' %> </p>
+<p>
+	Once downloaded, create a new file generate_key.rb in the bitcoin-ruby/examples folder. Add the following lines to include the appropriate libraries. 
+</p>
+<pre  class="language-ruby"><code class="language-ruby">
+# examples/generate_key.rb
+$:.unshift( File.expand_path("../../lib", __FILE__) )
+require 'bitcoin'
+require 'open-uri'
+</code></pre>
+</br>
+<h4>1. Create a testnet address</br></h4>
+<p>
+	We will be using testnet, so you do not accidentally your entire Bitcoin balance. Testnet is the test environment for Bitcoin, a sandbox where developers can try out software and Bitcoin core developers can release changes for network testing. 
+</p>
+
+<p>
+	Add the line below to specify using the testnet network:
+</p>
+<pre  class="language-ruby"><code class="language-ruby">
+Bitcoin::network = :testnet3
+</code></pre>
+<p>
+	To create a testnet address, first create a key. The library method creates this key as an array, where key[0] is the private key and key[1] is the uncompressed public key. For the sake of simplicity, we are printing the private key in plain text and storing it in a file, but keep in mind this has serious security issues, and great care should be taken to protect your private key. 
+</p>
+<p>
+	It is important to note that the default key function generates the uncompressed public key. Since the public key represents a coordinate on the elliptic curve (x,y), we can refer to the point by either the x or y value. The x value is the compressed public key, and the y value is the uncompressed public key. In Elliptic Curve Cryptography, this coordinate is generated using an Elliptic Curve function with discrete inputs. The private key is the coefficients of the Elliptic Curve function that generates the public key coordinates. 
+</p><p>
+	Add the code below to generate a key, the corresponding address, and then print both. 
+	</p>
+<pre  class="language-ruby"><code class="language-ruby">
+key = Bitcoin::generate_key
+p key
+address = Bitcoin::pubkey_to_address(key[1])
+p key
+</code></pre>
+<p>
+	Navigate to the bitcoin-ruby/ directory (above bitcoin-ruby/examples) and run :</p>
+<pre  class="language-ruby"><code class="language-ruby">
+$> ruby examples/generate_key.rb
+# address
+"mnwpcUh76eLVYzEXCuh4fypzABEtygqFR5"
+[
+ # private key
+ [0] "9baf399f185279928a965b0c6fe1eb1c19a6292d1c8ffcf41dda8f234665782a", 
+ # public key uncompressed   
+ [1] "04059a7b5a44fb86a863f7fa891cc9a0c9e103d8a6ea1f701de81a9e2c83d2bb9b7cc7757f7f338daeb78b11f8cb51ba876a06a52d27a0b453ad4aba2e56b1c307"
+]
+</code></pre>
+<p>
+	Store this private key! The address and public keys can always be regenerated from the private key, but it is important you keep the private key secure. 
+</p>
+<p>
+	Also note that the address starts with an m, and the private key with a 9. This byte is a prefix dictating the version. More info can be found in the <%= link_to 'List of address prefixes', 'https://en.bitcoin.it/wiki/List_of_address_prefixes' %>
+</p>
+
+</br>
+
+
+
+<h4>2. Send funds from testnet faucet to new address</br></h4>
+<p>
+	Now that you have an address, send some test Bitcoin (tBTC) to it. In order to send your custom message later on, you need to have some Bitcoin to send! There are services called faucets, that send free tBTC to your address. One example is <%= link_to "TP's TestNet Faucet.", 'http://tpfaucet.appspot.com/' %>
+</p><p>
+	Enter your address you just created in the above faucet to receive your tBTC. 
+</p></br>
+
+<h4>3. Verify transfer of funds</br></h4>
+<p>
+	Once you have waited for the transaction to be confirmed in the next block on the blockchain (typically 10-20 minutes), verify that your address received tBTC. To do so, search via your address on <%= link_to 'biteasy,', 'https://www.biteasy.com/testnet/blocks' %> or any number of blockchain APIs.
+</p>
+<p>
+	Below is my transaction. You can see my address is listed as an output, and received .7 tBTC. This faucet sent the remaining balance to a new address. The sum of the outputs must add up to the input amount, whatever is missing counts as a "fee" to whoever mined the block (in this case Total Input - Total Output = 0).
+</br>
+</p>
+<%= image_tag('btchelloworld-biteasy.png', alt: "biteasy" , class: 'img-responsive') %>
+</br></br>
+
+<h4>4. Create a new transaction with OP_RETURN</br></h4>
+<p>
+	Next, we use the address we just created, and the funds inside to send our own transaction, that includes our special message. 
+</p><p>
+	The OP_RETURN Script code is a special kind of Bitcoin transaction output that allows the sender to embed up to 80 bytes worth of arbitrary data. In our case, we will embed an ASCII text message converted to HEX Digits. You can convert ASCII to HEX using the chart below. 
+</br></br>
+<%= image_tag('btchelloworld-ascii-to-hex.png', alt: "ASCII to Hex Chart" , class: 'img-responsive') %>
+</br>
+<p>Create a new ruby file in examples, called testnet_transaction.rb, and enter the following code (including the the header requirements). In this case, I am storing the string HELLO_WORLD_FROM_NELSON, my message, as a hex type in the blockchain. I converted my string to a HEX representation using the chart above.</p>
+<pre  class="language-ruby"><code class="language-ruby">
+# testnet_transaction.rb
+$:.unshift( File.expand_path("../../lib", __FILE__) )
+require 'bitcoin'
+require 'ap'
+require 'open-uri'
+# specify testnet network, alternatively use :bitcoin to use bitcoin network
+Bitcoin::network = :testnet3
+HELLO_WORLD_FROM_NELSON = "48454c4c4f5f574f524c445f46524f4d5f4e454c534f4e"
+</code></pre>
+</br>
+<p>
+	Next, we need to pull in the previous transaction in order to unlock the tBTC within so we can spend it in the next transaction. We can refer to the previous transaction using its hash, which you'll notice is the same as the first line of the JSON data. We use this hash to grab the full JSON  
+
+</p>
+
+<pre  class="language-ruby"><code class="language-ruby">
+prev_hash = "13a8cf532bb0485feeb6ef4596e6476c182a92519dabb745eb4bde475f267475"
+prev_tx = Bitcoin::P::Tx.from_json(open("http://test.webbtc.com/tx/#{prev_hash}.json"))
+</code></pre>
+
+
+</br>
+<p>The raw text of the above transaction (prev_tx) in JSON is below. </p>
+<pre  class="language-javascript"><code class="language-javascript">
+{
+  "hash": "13a8cf532bb0485feeb6ef4596e6476c182a92519dabb745eb4bde475f267475",
+  "ver": 1,
+  "vin_sz": 1,
+  "vout_sz": 2,
+  "lock_time": 0,
+  "size": 225,
+  "in": [
+    {
+      "prev_out": {
+        "hash": "971ba3865085eb7555d2858f73b59f1dfefde2c3414235e7e48b58aa382b0912",
+        "n": 1
+      },
+      "scriptSig": "304402207179b00b128ca72135eb8ce948271f0bb2ce3d0f29421efc6bb5b2af7a0fbffa022049c642abb9e99f8c5bd69979ce82f904ce0219587efcb0e0337df5d39544554c01 03b509d37506504a349f2a552b380bf8c598161e2dd5359f4139452405fc0080e5"
+    }
+  ],
+  "out": [
+    {
+      "value": "37.58928655",
+      "scriptPubKey": "OP_DUP OP_HASH160 a989f457f855c43e878fe278e7148b5ca6548bb5 OP_EQUALVERIFY OP_CHECKSIG",
+      "address": "mvyPkiauSTTsWwMHwHePGBScNEmNZiiv1s"
+    },
+    {
+      "value": "0.70000000",
+      "scriptPubKey": "OP_DUP OP_HASH160 517cdddbdc14907176c6762514914a60cc49ed43 OP_EQUALVERIFY OP_CHECKSIG",
+      "address": "mnwpcUh76eLVYzEXCuh4fypzABEtygqFR5"
+    }
+  ],
+  "nid": "ecf0d37784e7fcdbc3a2d230c7e7a9a3d6027c39d9962e3c6ea2dabaa6cb60f9"
+}
+</code></pre>
+</br>
+<p>
+	We set prev_out_index to 1 to refer to which output in the previous transaction we want to spend from. In this case it is the second (where 0 is first, and 1 is second). This is also where our private key comes in, the key used to unlock the previous output and make it spendable. We set the recipient address back to ourselves. 
+</p>
+
+<pre  class="language-javascript"><code class="language-javascript">
+prev_out_index = 1
+keySender = Bitcoin::Key.new("9baf399f185279928a965b0c6fe1eb1c19a6292d1c8ffcf41dda8f234665782a", nil, compressed: false)
+toAddress = "mnwpcUh76eLVYzEXCuh4fypzABEtygqFR5"</code></pre>
+
+</br>
+<p>Next, build the transaction. We use the Bitcoin builder syntax, specifiying the input (the previous transaction and our key to unlock it), and the outputs (one going back to ourself and the other is the OP_RETURN special output). It is in this second output that we insert our message. We are also leaving .01 BTC as a fee to the miner, to encourage them to include our transaction in the latest block.</p>
+<pre  class="language-ruby"><code class="language-ruby">
+include Bitcoin::Builder
+
+new_tx = build_tx do |t|
+  t.input do |i|
+    i.prev_out prev_tx
+    i.prev_out_index prev_out_index
+    i.signature_key keySender
+  end
+  t.output do |o|
+    o.value 69000000 # 70 million satoshi = .7 BTC, leave 1 million satoshi as fee
+    o.to toAddress
+  end
+  t.output do |o|
+      o.to HELLO_WORLD_FROM_NELSON, "op_return" # 70 million satoshi = .7 BTC
+  end
+end
+</code></pre>
+</br>
+<p>Finally, write the contents of your transaction to a file, and print a success message.</p>
+<pre  class="language-ruby"><code class="language-ruby">
+f = File.new("op_return_tx.json", 'w+')
+f.write(new_tx.to_json)
+f.close
+
+p "Transaction successfully generated"
+</code></pre>
+
+</br>
+<h4>5. Relay new transaction to Bitcoin testnet</br></h4>
+<p>
+	First, run the script we've just created. 
+</p>
+<pre  class="language-ruby"><code class="language-ruby">
+$> ruby examples/testnet_transaction.rb
+"Transaction successfully generated"
+</code></pre></br>
+<p>
+	Next, store the contents of the JSON transaction in a command line variable so that we can embed its contents in a curl request to a tBTC relaying API. This API will relay our transaction to the Bitcoin testnet and then estimate its propagation. We will use the API provided by <%= link_to 'test.webbtc.com.', 'http://test.webbtc.com/api/relay' %>
+</p>
+<pre class="language-ruby"><code class="language-ruby">
+$> value=$(&lt;op_return_tx.json)
+$> echo $value
+{ "hash":"ee4aa59aeb8dbb8381e8b086d87b8f3a6b3c88bbcdae3abe1dc88d0d26a6889d", "ver":1, "vin_sz":1, "vout_sz":2, "lock_time":0, "size":258, "in":[ { "prev_out":{ "hash":"13a8cf532bb0485feeb6ef4596e6476c182a92519dabb745eb4bde475f267475", "n":1 }, "scriptSig":"304502210099a456ab79a33ea12086fcffc3a2807185af6940cb26372510cc46fbc1984b10022049c36dcedfd4cecbb34a366dfb410e1350eb0808ab48b62913040f471cedf8be01 04059a7b5a44fb86a863f7fa891cc9a0c9e103d8a6ea1f701de81a9e2c83d2bb9b7cc7757f7f338daeb78b11f8cb51ba876a06a52d27a0b453ad4aba2e56b1c307" } ], "out":[ { "value":"0.69000000", "scriptPubKey":"OP_DUP OP_HASH160 517cdddbdc14907176c6762514914a60cc49ed43 OP_EQUALVERIFY OP_CHECKSIG" }, { "value":"0.00000000", "scriptPubKey":"OP_RETURN 48454c4c4f5f574f524c445f46524f4d5f4e454c534f4e" } ] }
+
+$> curl http://test.webbtc.com/relay_tx.json -X POST -d "wait=10&tx=$value"
+{
+  "success": true,
+  "hash": "ba7d89769142c613857b3920afc581564cc465f2160b6025c930f96797ba0725",
+  "propagation": {
+    "received": 0,
+    "sent": 1,
+    "percent": 0.0
+  }
+</code></pre>
+</br></br>
+<h4>6. Verify transaction exists</br></h4>
+<p>
+	Finally, after waiting 10-20 minutes for a network confimration, we'll check <%= link_to 'Coin Secrets', 'http://testnet.coinsecrets.org/' %> to see our transaction. Coin Secrets looks for metadata in the Bitcoin blockchain (querying the blockchain for transactions with an OP_RETURN code). 
+</p>
+	<%= image_tag('btchelloworld-coinsecrets.png', alt: "Coin secrets" , class: 'img-responsive') %>
+</br>
+<p>
+	Success! There it is! You can now extend this concept to any arbitrary file. Use a SHA256 instead of the "HELLO_WORLD_FROM_NELSON" text. Hope you've enjoyed, please email me if you have any questions. 
+</p>
+<p>
+	You can download the complete script 
+	<%= link_to 'here.' ,'data/testnet_transaction.rb', :target => "_blank" %>
+	</p>
