@@ -34,22 +34,29 @@ body {
   background-color: #fff;
 }
 
+
 .nav-pills {
   ul {
     border-top: 1px solid #d0d0d0;
   }
+  li {
+    a {
+      color: #666;
+    }
+  }
+
 }
 
 .container {
-	margin-top: 45px;
-  	padding-top: 5px;
+	margin-top: 25px;
+  padding-bottom: 10px;
     border-top: 1px solid #eaeaea;
 
 }
 
 .row {
-	  	margin-top: 20px;
-      padding-top: 20px;
+	  	margin-top: 10px;
+      padding-top: 10px;
 
 }
 
