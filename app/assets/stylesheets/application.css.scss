@@ -31,11 +31,11 @@ p, div {
 }
 
 body {
-  background-color: #ececec;
+  background-color: #fff;
 }
 
 .nav-pills {
-  li {
+  ul {
     border-top: 1px solid #d0d0d0;
   }
 }
@@ -43,17 +43,19 @@ body {
 .container {
 	margin-top: 45px;
   	padding-top: 5px;
-	border-top: 1px solid #eaeaea;
+    border-top: 1px solid #eaeaea;
 
 }
 
 .row {
 	  	margin-top: 20px;
       padding-top: 20px;
-		border-top: 1px solid #eaeaea;
+
 }
 
-
+#border-bar {
+  border-top: 1px solid #eaeaea;
+}
 
 /* forms */
 

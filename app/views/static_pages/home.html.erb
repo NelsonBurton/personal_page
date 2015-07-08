@@ -1,29 +1,39 @@
-<div>
-    <p>
-      Below follows some posts I have written about things I have done and topics that interest me. 
-    </p>
-<div>
-
 <div class="row">
-	<div class="col-md-1" "col-xs-1">>
-
-	</div>
-	<div class="col-md-11" "col-xs-11">
-        <%= render :partial => 'posts/bitcoinhelloworld' %>
-        <div class="page-header"></div>
-        <%= render :partial => 'posts/bitcoinremittances' %>
-        <div class="page-header"></div>
-        <%= render :partial => 'posts/bench' %>
-        <div class="page-header"></div>
-        <%= render :partial => 'posts/nyccoworking' %>
-	</div>
-
+    <div class="col-md-4">
+        <%= link_to image_tag('home-1.jpg', alt: "" , class: 'img-responsive'), 'https://github.com/nelsonburton' %>
+        <h3>Bitcoin Notarizer</h3>
+        <p>Ruby on Rails application that uses the Bitcoin blockchain to notarize documents.</p>
+    </div>
+    <div class="col-md-4">
+        <%= link_to image_tag('home-2.jpg', alt: "" , class: 'img-responsive'), 'posts/bitcoinhelloworld' %>
+        <h3>Blockchain Hello World</h3>
+        <p>A detailed tutorial for writing messages into the Bitcoin blockchain.</p>
+    </div>
+    <div class="col-md-4">
+        <%= link_to image_tag('home-3.jpg', alt: "" , class: 'img-responsive'), 'posts/nyccoworking'%>
+        <h3>NYC Coworking Map</h3>
+        <p>A data visualization and analysis of the coworking spaces in New York City.</p>
+    </div>
 </div>
+<div class="row">
+    <div class="col-md-4">
+        <%= link_to image_tag('home-4.jpg', alt: "" , class: 'img-responsive'), 'posts/bitcoinremittances' %>
+        <h3>Bitcoin Remittances</h3>
+        <p>How Bitcoin makes sending money overseas cheaper and faster than ever before.</p>
+    </div>
+    <div class="col-md-4">
+        <%= link_to image_tag('home-5.jpg', alt: "" , class: 'img-responsive'), 'https://ketosis-calculator.herokuapp.com/' %>
+        <h3>Ketosis Calorie Calculator</h3>
+        <p>Ruby on Rails application that calculates personal dietary requirements.</p>
+    </div>
+    <div class="col-md-4">
+        <%= link_to image_tag('home-6.jpg', alt: "" , class: 'img-responsive'), 'posts/bench' %>
+        <h3>Building a Bench</h3>
+        <p>Building something, but with wood instead of software.</p>
+    </div>
 </div>
 
 
 
-
-</div>
 
 

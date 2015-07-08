@@ -3,4 +3,9 @@ class StaticPagesController < ApplicationController
 	end
 	def about
 	end
+	def posts
+		@post_name = params['id']
+		render "posts"
+		# render :partial => "posts/#{params['id']}"
+	end
 end
