@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require prism
 //= require bootstrap-sprockets
+//= require bootstrap
 //= require_tree .

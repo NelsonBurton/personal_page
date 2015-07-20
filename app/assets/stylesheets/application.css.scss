@@ -1,3 +1,5 @@
+ @import "bootstrap";
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -10,12 +12,11 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
  *= require_self
+ *= require_tree .
  */
 
  @import "bootstrap-sprockets";
- @import "bootstrap";
 
 h1, h2, h3, h4, h5, h6 {
     font-family:  'Roboto Slab', serif;
@@ -57,6 +58,8 @@ body {
 .row {
 	  	margin-top: 10px;
       padding-top: 10px;
+      padding-bottom: 25px;
+
 
 }
 
